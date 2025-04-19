@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.opentoolkit.hierarchyicons": {
+      "version": "https://github.com/OpenUnityToolkit/HierarchyIcons.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "96c4a0fd74b232be6e92148f66e363bdc0f71df9"
+    },
     "com.unity.burst": {
       "version": "1.8.18",
       "depth": 1,
