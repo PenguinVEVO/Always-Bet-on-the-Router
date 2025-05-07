@@ -47,9 +47,14 @@ namespace Mitchel.PlayerController
             {
                 velocity.y = -2f;
             }
+
+            // Set velocity
+            velocity.x = x * sidestepSpeed;
+            velocity.y += mass * gravity * Time.deltaTime;
+            velocity.z = z * forwardSpeed;
             
-            // TODO: Set up this slop checking
-            /*Vector3 horizontalMove = new Vector3(velocity.x, 0, 0);
+            // Slope detection to ensure the player slides down a slope rather than "falling" off of it
+            Vector3 horizontalMove = new Vector3(velocity.x, 0, velocity.z);
             if (_isGrounded)
             {
                 Vector3 slopeNormal = GetSlopeNormal();
@@ -57,15 +62,14 @@ namespace Mitchel.PlayerController
                 {
                     horizontalMove = Vector3.ProjectOnPlane(horizontalMove, slopeNormal);
                 }
-                else Velocity.y = 0;
-            } */
-            
-            velocity.y += mass * gravity * Time.deltaTime;
-            
-            // Apply axis inputs multiplied by movement speeds
-            Vector3 move = transform.right * (x * sidestepSpeed) + 
+                else velocity.y = 0;
+            }
+
+            // Calculate final velocity with the local transform of the player
+            Vector3 move = transform.right * horizontalMove.x + 
                            transform.up * velocity.y + 
-                           transform.forward * (z * forwardSpeed);
+                           transform.forward * horizontalMove.z;
+            
             _controller.Move(move * Time.deltaTime);
         }
         
@@ -78,6 +82,17 @@ namespace Mitchel.PlayerController
                 return hit.normal;
             }
             return Vector3.up;
+        }
+        
+        void OnDrawGizmos()
+        {
+            if (_controller != null)
+            {
+                Vector3 slopeRayOrigin = transform.position + _controller.center + Vector3.down * (_controller.height / 2);
+                float slopeRayDistance = slopeCheckDistance + 0.1f;
+                Gizmos.color = Color.green;
+                Gizmos.DrawLine(slopeRayOrigin, slopeRayOrigin + Vector3.down * slopeRayDistance);
+            }
         }
         #endregion
     }

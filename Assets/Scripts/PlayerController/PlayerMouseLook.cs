@@ -30,7 +30,6 @@ namespace Mitchel.PlayerController
 
             _rotationX -= mouseY;
             _rotationX = Mathf.Clamp(_rotationX, minMaxPitch.x, minMaxPitch.y);
-            Debug.Log($"{mouseX}, {mouseY}, {_rotationX}");
 
             // Rotate both the camera and the player model together (model is restricted to X axis only, obviously)
             playerCamera.transform.localRotation = Quaternion.Euler(_rotationX, 0f, 0f);
