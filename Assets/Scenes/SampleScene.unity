@@ -335,6 +335,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forwardSpeed: 4
   sidestepSpeed: 3
+  sprintModifier: 1.5
+  slopeSpeedModifier: 0.7
   velocity: {x: 0, y: 0, z: 0}
   gravity: -9.81
   mass: 3
@@ -344,6 +346,30 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  headBobCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.4005163
+      outSlope: 3.4005163
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.033223797
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.403577
+      outSlope: -3.403577
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.040146947
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!43 &174810936
 Mesh:
   m_ObjectHideFlags: 0

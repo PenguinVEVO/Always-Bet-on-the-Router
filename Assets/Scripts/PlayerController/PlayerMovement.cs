@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using FrameLabs.Utilities;
 using UnityEngine;
 
 namespace Mitchel.PlayerController
@@ -11,10 +10,9 @@ namespace Mitchel.PlayerController
         [Header("Movement Settings")] 
         public float forwardSpeed = 12f;
         public float sidestepSpeed = 10f;
-#if UNITY_EDITOR
-        [ReadOnlyField]
-#endif
-        public Vector3 velocity;
+        [Range(1.1f, 4f)] public float sprintModifier;
+        [Range(0.1f, 1f)] public float slopeSpeedModifier;
+        [HideInInspector] public Vector3 velocity;
 
         [Header("Gravity/Ground Settings")]
         public float gravity = -9.81f;
@@ -25,13 +23,18 @@ namespace Mitchel.PlayerController
         [SerializeField] private float slopeCheckDistance = 0.5f;
         [SerializeField] private LayerMask groundMask;
         private bool _isGrounded;
+
+        [Header("Vertical Head Bob")] 
+        [SerializeField] private AnimationCurve headBobCurve;
+        private float stepLength;
         
-        private CharacterController _controller;
+        private CharacterController controller;
     
         // Start is called before the first frame update
         void Start()
         {
-            _controller = GetComponent<CharacterController>();
+            controller = GetComponent<CharacterController>();
+            stepLength = headBobCurve.keys[headBobCurve.length - 1].time;
         }
 
         // Update is called once per frame
@@ -47,11 +50,16 @@ namespace Mitchel.PlayerController
             {
                 velocity.y = -2f;
             }
+            
+            // Calculate sprint speed
+            float sprintMultiply = Input.GetKey(KeyCode.LeftShift) 
+                ? sprintModifier 
+                : 1;
 
             // Set velocity
-            velocity.x = x * sidestepSpeed;
+            velocity.x = x * sidestepSpeed * sprintMultiply;
             velocity.y += mass * gravity * Time.deltaTime;
-            velocity.z = z * forwardSpeed;
+            velocity.z = z * forwardSpeed * sprintMultiply;
             
             // Slope detection to ensure the player slides down a slope rather than "falling" off of it
             Vector3 horizontalMove = new Vector3(velocity.x, 0, velocity.z);
@@ -70,13 +78,13 @@ namespace Mitchel.PlayerController
                            transform.up * velocity.y + 
                            transform.forward * horizontalMove.z;
             
-            _controller.Move(move * Time.deltaTime);
+            controller.Move(move * Time.deltaTime);
         }
         
         #region =====  UTILITY FUNCTIONS  =====
         Vector3 GetSlopeNormal()
         {
-            Vector3 origin = transform.position + _controller.center + Vector3.down * (_controller.height / 2);
+            Vector3 origin = transform.position + controller.center + Vector3.down * (controller.height / 2);
             if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, slopeCheckDistance + 0.1f, groundMask))
             {
                 return hit.normal;
@@ -86,9 +94,9 @@ namespace Mitchel.PlayerController
         
         void OnDrawGizmos()
         {
-            if (_controller != null)
+            if (controller != null)
             {
-                Vector3 slopeRayOrigin = transform.position + _controller.center + Vector3.down * (_controller.height / 2);
+                Vector3 slopeRayOrigin = transform.position + controller.center + Vector3.down * (controller.height / 2);
                 float slopeRayDistance = slopeCheckDistance + 0.1f;
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(slopeRayOrigin, slopeRayOrigin + Vector3.down * slopeRayDistance);
