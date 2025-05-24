@@ -450,9 +450,9 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   gravity: -9.81
   mass: 3
-  minSlopeMovementAngle: 10
+  minSlopeMovementAngle: 8.5
   groundCheck: {fileID: 261822315}
-  groundCheckDistance: 0.2
+  groundCheckDistance: 0.1
   slopeCheckDistance: 0.1
   groundMask:
     serializedVersion: 2
