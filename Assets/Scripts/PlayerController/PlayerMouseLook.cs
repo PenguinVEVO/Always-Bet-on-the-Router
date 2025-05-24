@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Mitchel.PlayerController
 {
@@ -35,5 +36,20 @@ namespace Mitchel.PlayerController
             playerCamera.transform.localRotation = Quaternion.Euler(_rotationX, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
         }
+        
+        #region INPUT DETECTION
+        /// <summary>
+        /// Get the interaction button state from the player action map and then interact with an interactable.
+        /// Only to be used by the PlayerInput component.
+        /// </summary>
+        /// <param name="context"></param>
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                // Put your code here
+            }
+        }
+        #endregion
     }
 }
