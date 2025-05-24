@@ -8574,11 +8574,73 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 49525616-9096-461a-b562-c16e9ce51d48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: FirstPersonPlayer/Interact[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3076854881064966625}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnInteract
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Mitchel.PlayerController.PlayerMouseLook, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8372427080077329874, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba3676932e792924f9110b0c9fe63b95, type: 3}
+--- !u!114 &3076854881064966625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8006357225182363821, guid: ba3676932e792924f9110b0c9fe63b95,
+    type: 3}
+  m_PrefabInstance: {fileID: 3076854881064966624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d94f2bbd4083b489644407c37db84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
