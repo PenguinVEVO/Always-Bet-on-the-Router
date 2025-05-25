@@ -6,17 +6,17 @@ namespace Mitchel.PlayerController
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Movement Settings")] 
+        [Header("Base > Movement Settings")] 
         public float forwardSpeed = 12f;
         public float sidestepSpeed = 10f;
         [Range(1.1f, 4f)] public float sprintModifier;
         [SerializeField] private float accelerationRate = 10f;
         [SerializeField] private float decelerationRate = 8f;
-        [HideInInspector] public Vector3 velocity;
+        private Vector2 currentMoveVelocity;
         private float currentForwardSpeed;
         private float currentSidestepSpeed;
 
-        [Header("Vertical Head Bob")] 
+        [Header("Base > Vertical Head Bob")] 
         [SerializeField] private AnimationCurve headBobCurve;
         [SerializeField] private float cameraRollAmount;
         [SerializeField] private float cameraRollSpeed;
@@ -37,19 +37,30 @@ namespace Mitchel.PlayerController
         // Update is called once per frame
         private void Update()
         {
-            // Get forward and side axis inputs
-            float x = currentInput.x;
-            float z = currentInput.y;
+            Vector2 direction = new Vector2(currentInput.x, currentInput.y).normalized;
 
-            // Set velocity
-            velocity.x = x * currentForwardSpeed;
-            velocity.z = z * currentSidestepSpeed;
-
-            // Calculate final velocity with the local transform of the player
-            Vector3 move = transform.right * velocity.x + 
-                           transform.forward * velocity.z;
+            if (direction.magnitude >= 0.1f)
+            {
+                // Set velocity
+                float newVelocityX = direction.x * currentForwardSpeed; // Forward/backward
+                float newVelocityZ = direction.y * currentSidestepSpeed; // Sidestep
             
-            controller.Move(move * Time.deltaTime);
+                // Calculate directional velocity with the local transform of the player
+                Vector2 moveDirection = transform.right * newVelocityX +
+                                        transform.forward * newVelocityZ;
+
+                // Calculate final velocity with acceleration applied
+                currentMoveVelocity =
+                    Vector2.MoveTowards(currentMoveVelocity, moveDirection, accelerationRate * Time.deltaTime);
+            }
+            else
+            {
+                // Calculate final velocity with deceleration applied
+                currentMoveVelocity =
+                    Vector2.MoveTowards(currentMoveVelocity, Vector3.zero, decelerationRate * Time.deltaTime);
+            }
+            
+            controller.Move(currentMoveVelocity * Time.deltaTime);
         }
         
         #region INPUT DETECTION
