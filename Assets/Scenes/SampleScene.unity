@@ -8537,12 +8537,12 @@ PrefabInstance:
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: accelerationRate
-      value: 16
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: decelerationRate
-      value: 13
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3766266372691802878, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
