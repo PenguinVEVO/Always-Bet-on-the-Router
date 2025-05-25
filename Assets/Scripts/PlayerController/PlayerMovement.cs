@@ -6,7 +6,7 @@ namespace Mitchel.PlayerController
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Base > Movement Settings")] 
+        [Header("Movement Settings")] 
         public float forwardSpeed = 12f;
         public float sidestepSpeed = 10f;
         [Range(1.1f, 4f)] public float sprintModifier;
@@ -16,7 +16,7 @@ namespace Mitchel.PlayerController
         private float currentForwardSpeed;
         private float currentSidestepSpeed;
 
-        [Header("Base > Vertical Head Bob")] 
+        [Header("Vertical Head Bob")] 
         [SerializeField] private AnimationCurve headBobCurve;
         [SerializeField] private float cameraRollAmount;
         [SerializeField] private float cameraRollSpeed;

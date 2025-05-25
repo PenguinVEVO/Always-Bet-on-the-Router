@@ -8519,6 +8519,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1636672301765604660, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: forwardSpeed
