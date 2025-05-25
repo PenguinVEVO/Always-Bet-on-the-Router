@@ -15,8 +15,6 @@ namespace Mitchel.PlayerController
         private Vector3 currentMoveVelocity;
         private float currentForwardSpeed;
         private float currentSidestepSpeed;
-        private float inputGraceTimer = 0.1f;
-        private float gracePeriod = 0.1f;
 
         [Header("Vertical Head Bob")] 
         [SerializeField] private AnimationCurve headBobCurve;
@@ -25,7 +23,6 @@ namespace Mitchel.PlayerController
         private float stepLength;
 
         private Vector2 currentInput;
-        private Vector3 lastInputMoveDirection = Vector3.zero;
         private CharacterController controller;
     
         // Start is called before the first frame update
@@ -53,27 +50,13 @@ namespace Mitchel.PlayerController
                 // Calculate directional velocity with the local transform of the player
                 Vector3 targetMove = transform.right * targetX + 
                                      transform.forward * targetZ;
-                
-                // Check how similar new input is to the last input direction
-                float alignment = Vector3.Dot(lastInputMoveDirection.normalized, targetMove.normalized);
-                
-                // If input is clearly in a new direction, reset grace timer
-                if (alignment < 0.99f)
-                {
-                    inputGraceTimer += Time.deltaTime;
 
-                    if (inputGraceTimer >= gracePeriod)
-                    {
-                        // Accept the new input direction after grace period
-                        lastInputMoveDirection = targetMove;
-                        inputGraceTimer = 0f;
-                    }
-                }
-                else
+                // Check if direction changed (dot product < 0.99 allows slight tolerance)
+                if (Vector3.Dot(currentMoveVelocity.normalized, targetMove.normalized) < 0.99f &&
+                    currentMoveVelocity.magnitude > 0.01f)
                 {
-                    // Input is similar, update direction and reset timer
-                    lastInputMoveDirection = targetMove;
-                    inputGraceTimer = 0f;
+                    // Snap to new direction with same speed
+                    currentMoveVelocity = targetMove.normalized * currentMoveVelocity.magnitude;
                 }
 
                 // Calculate final velocity with acceleration applied
