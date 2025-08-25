@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Mitchel.PlayerController
+namespace Mitchel.Player
 {
     public class PlayerMouseLook : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Mitchel.PlayerController
+namespace Mitchel.Player
 {
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
@@ -15,24 +15,19 @@ namespace Mitchel.PlayerController
         private Vector3 currentMoveVelocity;
         private float currentForwardSpeed;
         private float currentSidestepSpeed;
-        private float inputGraceTimer = 0.1f;
-        private float gracePeriod = 0.1f;
-
-        [Header("Vertical Head Bob")] 
-        [SerializeField] private AnimationCurve headBobCurve;
-        [SerializeField] private float cameraRollAmount;
-        [SerializeField] private float cameraRollSpeed;
-        private float stepLength;
 
         private Vector2 currentInput;
-        private Vector3 lastInputMoveDirection = Vector3.zero;
         private CharacterController controller;
+        
+        // Accessor properties
+        public Vector2 CurrentInput => currentInput;
+        public Vector3 CurrentMoveVelocity => currentMoveVelocity;
+        public float CurrentForwardSpeed => currentForwardSpeed;
     
         // Start is called before the first frame update
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-            stepLength = headBobCurve.keys[headBobCurve.length - 1].time;
             currentForwardSpeed = forwardSpeed;
             currentSidestepSpeed = sidestepSpeed;
         }
@@ -40,41 +35,20 @@ namespace Mitchel.PlayerController
         // Update is called once per frame
         private void Update()
         {
+            // Get move input
             Vector2 inputDir = new Vector2(currentInput.x, currentInput.y).normalized;
+            Debug.Log(inputDir);
 
+            // Handle movement of player
             if (inputDir.magnitude >= 0.01f)
             {
-                inputDir.Normalize();
-                
                 // Set velocity
-                float targetX = inputDir.x * currentForwardSpeed; // Forward/backward
-                float targetZ = inputDir.y * currentSidestepSpeed; // Sidestep
+                float targetZ = inputDir.y * currentForwardSpeed; // Forward/backward
+                float targetX = inputDir.x * currentSidestepSpeed; // Sidestep
             
                 // Calculate directional velocity with the local transform of the player
                 Vector3 targetMove = transform.right * targetX + 
                                      transform.forward * targetZ;
-                
-                // Check how similar new input is to the last input direction
-                float alignment = Vector3.Dot(lastInputMoveDirection.normalized, targetMove.normalized);
-                
-                // If input is clearly in a new direction, reset grace timer
-                if (alignment < 0.99f)
-                {
-                    inputGraceTimer += Time.deltaTime;
-
-                    if (inputGraceTimer >= gracePeriod)
-                    {
-                        // Accept the new input direction after grace period
-                        lastInputMoveDirection = targetMove;
-                        inputGraceTimer = 0f;
-                    }
-                }
-                else
-                {
-                    // Input is similar, update direction and reset timer
-                    lastInputMoveDirection = targetMove;
-                    inputGraceTimer = 0f;
-                }
 
                 // Calculate final velocity with acceleration applied
                 currentMoveVelocity =

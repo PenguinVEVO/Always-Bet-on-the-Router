@@ -1352,6 +1352,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &470692803 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5614959390705394177, guid: ba3676932e792924f9110b0c9fe63b95,
+    type: 3}
+  m_PrefabInstance: {fileID: 3076854881064966624}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &612880577
 Mesh:
   m_ObjectHideFlags: 0
@@ -8522,27 +8528,27 @@ PrefabInstance:
     - target: {fileID: 1636672301765604660, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: m_SlopeLimit
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: forwardSpeed
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: sprintModifier
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: accelerationRate
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3203142839235646943, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
       propertyPath: decelerationRate
-      value: 8
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3766266372691802878, guid: ba3676932e792924f9110b0c9fe63b95,
         type: 3}
@@ -8652,7 +8658,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5614959390705394177, guid: ba3676932e792924f9110b0c9fe63b95,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 3076854881064966630}
   m_SourcePrefab: {fileID: 100100000, guid: ba3676932e792924f9110b0c9fe63b95, type: 3}
 --- !u!114 &3076854881064966625 stripped
 MonoBehaviour:
@@ -8660,12 +8670,58 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3076854881064966624}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 470692803}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7d94f2bbd4083b489644407c37db84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &3076854881064966626 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4605390011953834272, guid: ba3676932e792924f9110b0c9fe63b95,
+    type: 3}
+  m_PrefabInstance: {fileID: 3076854881064966624}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3076854881064966630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470692803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a0921bdb0595b4e850b10ac7287143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadBobType: 0
+  headBobCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.9055874
+      outSlope: -1.9055874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.035838127
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  headBobAmplitude: 0.1
+  headBobFrequency: 10
+  playerCamera: {fileID: 3076854881064966626}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
