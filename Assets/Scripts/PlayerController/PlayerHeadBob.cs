@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Mitchel.Player
 {
@@ -20,6 +21,7 @@ namespace Mitchel.Player
         [Header("Procedural Head Bob")]
         [SerializeField] private float headBobAmplitude;
         [SerializeField] private float headBobFrequency;
+        [Min(1f)] [SerializeField] private float sprintFrequencyModifier;
         private float initialCameraOffset;
         
         [Header("Object References")]
@@ -46,15 +48,21 @@ namespace Mitchel.Player
                     CurveHeadBob();
                     break;
             }
+            if (Keyboard.current.jKey.wasPressedThisFrame)
+                headBobFrequency += 0.5f;
         }
 
         private void ProceduralHeadBob()
         {
             float movementAmplitude = playerMove.CurrentMoveVelocity.magnitude / playerMove.CurrentForwardSpeed;
+            Debug.Log($"Velocity: {playerMove.CurrentMoveVelocity.magnitude} / Speed: {playerMove.CurrentForwardSpeed} = Amplitude: {movementAmplitude}");
             float finalAmplitude = Mathf.Clamp01(movementAmplitude) * headBobAmplitude;
             
+            float sprintModifier = playerMove.IsSprinting
+                ? sprintFrequencyModifier
+                : 1f;
             Vector3 pos = playerCamera.transform.position;
-            pos.y = initialCameraOffset + Mathf.Sin(Time.time * headBobFrequency) * finalAmplitude;
+            pos.y = initialCameraOffset + Mathf.Sin(Time.time * (sprintModifier * headBobFrequency)) * finalAmplitude;
             playerCamera.transform.position = pos;
         }
 

@@ -15,6 +15,7 @@ namespace Mitchel.Player
         private Vector3 currentMoveVelocity;
         private float currentForwardSpeed;
         private float currentSidestepSpeed;
+        private bool isSprinting = false;
 
         private Vector2 currentInput;
         private CharacterController controller;
@@ -23,6 +24,7 @@ namespace Mitchel.Player
         public Vector2 CurrentInput => currentInput;
         public Vector3 CurrentMoveVelocity => currentMoveVelocity;
         public float CurrentForwardSpeed => currentForwardSpeed;
+        public bool IsSprinting => isSprinting;
     
         // Start is called before the first frame update
         private void Start()
@@ -86,12 +88,14 @@ namespace Mitchel.Player
             {
                 currentForwardSpeed = forwardSpeed * sprintModifier;
                 currentSidestepSpeed = sidestepSpeed * sprintModifier;
+                isSprinting = true;
             }
             
             if (context.canceled)
             {
                 currentForwardSpeed = forwardSpeed;
                 currentSidestepSpeed = sidestepSpeed;
+                isSprinting = false;
             }
         }
         #endregion
