@@ -1,0 +1,14 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour, IInteractable
+{
+	// Put your shit variables here lol
+	
+	public void StartInteraction() 
+	{
+		// Do your shit here lol
+		#NOTRIM#
+	}
+
+	// Do more shit here lol
+}

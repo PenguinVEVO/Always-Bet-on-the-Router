@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3766266372691802878}
   - component: {fileID: 1636672301765604660}
   - component: {fileID: 8006357225182363821}
+  - component: {fileID: 2802369834970152744}
   - component: {fileID: 3203142839235646943}
   - component: {fileID: 8372427080077329874}
   m_Layer: 0
@@ -53,13 +54,12 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.4
-  m_SlopeLimit: 45
+  m_SlopeLimit: 0
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -81,6 +81,47 @@ MonoBehaviour:
   minMaxPitch: {x: -75, y: 75}
   playerCamera: {fileID: 4605390011953834272}
   playerBody: {fileID: 3766266372691802878}
+--- !u!114 &2802369834970152744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614959390705394177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a0921bdb0595b4e850b10ac7287143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HeadBobType: 0
+  headBobCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -1.9055874
+      outSlope: -1.9055874
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.035838127
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  headBobAmplitude: 0.1
+  headBobFrequency: 10
+  sprintFrequencyModifier: 1.3
+  playerCamera: {fileID: 4605390011953834272}
 --- !u!114 &3203142839235646943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,36 +134,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b28aef904e5dbd4ca05f6a61c68747f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 4
+  forwardSpeed: 3.5
   sidestepSpeed: 3
   sprintModifier: 1.5
-  velocity: {x: 0, y: 0, z: 0}
-  headBobCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.4005163
-      outSlope: 3.4005163
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.033223797
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -3.403577
-      outSlope: -3.403577
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.040146947
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  cameraRollAmount: 1
-  cameraRollSpeed: 0.5
+  accelerationRate: 20
+  decelerationRate: 15
 --- !u!114 &8372427080077329874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +180,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 4ff4275a-e0de-4283-932a-324155f9ddfe
-    m_ActionName: FirstPersonPlayer/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+    m_ActionName: 'FirstPersonPlayer/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3203142839235646943}
@@ -180,7 +196,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 10e19666-f40c-4cf7-ae76-f132d134b9f7
-    m_ActionName: FirstPersonPlayer/Sprint[/Keyboard/shift]
+    m_ActionName: 'FirstPersonPlayer/Sprint[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 49525616-9096-461a-b562-c16e9ce51d48
+    m_ActionName: 'FirstPersonPlayer/Interact[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: FirstPersonPlayer
@@ -424,22 +444,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2571118854743697038, guid: f3643dd3d22f8cd43ac4cc73508402c6,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: add8ac3e542fe0f41ba0ed7889721bb9, type: 2}
     - target: {fileID: -1461304994638716399, guid: f3643dd3d22f8cd43ac4cc73508402c6,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6a5958b177888784783f772bf2213603, type: 2}
     - target: {fileID: -804731622281664130, guid: f3643dd3d22f8cd43ac4cc73508402c6,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: add8ac3e542fe0f41ba0ed7889721bb9, type: 2}
     - target: {fileID: -678588488315902003, guid: f3643dd3d22f8cd43ac4cc73508402c6,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: add8ac3e542fe0f41ba0ed7889721bb9, type: 2}
     - target: {fileID: -516098083770646512, guid: f3643dd3d22f8cd43ac4cc73508402c6,

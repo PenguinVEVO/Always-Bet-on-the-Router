@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 namespace Mitchel.Player
 {
     [RequireComponent(typeof(PlayerMovement))]
+    [Serializable]
     public class PlayerHeadBob : MonoBehaviour
     {
         private enum HeadBobTypeEnum { Procedural, CustomCurve }
